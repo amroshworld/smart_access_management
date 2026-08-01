@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Smart Access Management - Odoo 19 Enterprise Security Suite</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        :root {
+            --sam-primary: #1d4ed8;
+            --sam-primary-dark: #1e40af;
+            --sam-accent: #0284c7;
+            --sam-bg-dark: #0f172a;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #1e293b;
+        }
+        .sam-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e40af 100%);
+            color: #ffffff;
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .sam-badge-pill {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #60a5fa;
+            font-weight: 700;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .sam-card-feature {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .sam-card-feature:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+        .sam-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .sam-img-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 4px solid #ffffff;
+        }
+        .sam-price-badge {
+            background: #22c55e;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.5rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body class="bg-light p-3 p-md-5">
+    <div class="container-fluid max-w-1200 mx-auto">
+        
+        <!-- Hero Section -->
+        <section class="sam-hero text-center mb-5 shadow-lg">
+            <div class="mb-3">
+                <span class="sam-badge-pill">⚡ READY FOR ODOO 19.0</span>
+            </div>
+            <h1 class="display-4 fw-bold mb-3">Smart Access Management</h1>
+            <p class="lead text-light opacity-90 mx-auto max-w-800 mb-4">
+                The ultimate enterprise security suite for Odoo. Take total control over menus, models, fields, buttons, and system safeguards with a sleek SaaS-style dashboard.
+            </p>
+            <div class="d-flex align-items-center justify-content-center gap-3">
+                <span class="sam-price-badge">€99 EUR</span>
+                <span class="badge bg-white text-dark px-3 py-2 rounded-3 fw-bold">Lifetime License &amp; Free Updates</span>
+            </div>
+        </section>
+
+        <!-- Main Product Screenshot Showcase -->
+        <section class="mb-5 text-center">
+            <h2 class="fw-bold text-dark mb-2">Modern 100% Full-Width Form View</h2>
+            <p class="text-secondary mb-4">Responsive card grid layout eliminating unused margin space and clipping.</p>
+            <div class="sam-img-container mb-4">
+                <img src="main_screenshot.png" alt="Smart Access Management Overview" class="img-fluid w-100"/>
+            </div>
+        </section>
+
+        <!-- Key Features Grid -->
+        <section class="mb-5">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-dark">Why Enterprise Clients Choose Smart Access</h2>
+                <p class="text-secondary">Designed for scale, multi-company isolation, and seamless usability.</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="sam-card-feature h-100">
+                        <div class="sam-icon-box bg-danger text-white">🛡️</div>
+                        <h4 class="fw-bold text-dark mb-2">Global System Safeguards</h4>
+                        <p class="text-secondary mb-0">Master security overrides to instantly enforce Global Read-Only mode, block developer URL access (`?debug=1`), revoke login access, or disable external XML-RPC API scripts.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="sam-card-feature h-100">
+                        <div class="sam-icon-box bg-primary text-white">🙈</div>
+                        <h4 class="fw-bold text-dark mb-2">Visual Menu Visibility</h4>
+                        <p class="text-secondary mb-0">Hide top navbar menus, submenus, and action items visually per security profile without breaking background operational flows.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="sam-card-feature h-100">
+                        <div class="sam-icon-box bg-warning text-dark">🔒</div>
+                        <h4 class="fw-bold text-dark mb-2">Granular Model Access</h4>
+                        <p class="text-secondary mb-0">Fine-tune CRUD permissions (Create, Edit, Read, Delete, Archive, Export, Import) and view restrictions (Kanban, List, Pivot, Graph) per model.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="sam-card-feature h-100">
+                        <div class="sam-icon-box bg-success text-white">✏️</div>
+                        <h4 class="fw-bold text-dark mb-2">Field-Level Controls</h4>
+                        <p class="text-secondary mb-0">Set specific sensitive fields to Invisible, Read-Only, or Required dynamically based on assigned user security profiles.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="sam-card-feature h-100">
+                        <div class="sam-icon-box bg-info text-white">🔘</div>
+                        <h4 class="fw-bold text-dark mb-2">Button &amp; Tab Restrictions</h4>
+                        <p class="text-secondary mb-0">Hide specific action buttons, stat buttons, or notebook tabs across any model form view effortlessly.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="sam-card-feature h-100">
+                        <div class="sam-icon-box bg-dark text-white">📜</div>
+                        <h4 class="fw-bold text-dark mb-2">Security Audit Trail</h4>
+                        <p class="text-secondary mb-0">Built-in audit logging tracks all security profile creations, updates, and user assignments with complete timestamps and execution logs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kanban View Showcase -->
+        <section class="mb-5 text-center">
+            <h2 class="fw-bold text-dark mb-2">Access Profiles Kanban Dashboard</h2>
+            <p class="text-secondary mb-4">Clean card grid overview showing profile indicators, restricted items count, and quick toggles.</p>
+            <div class="sam-img-container">
+                <img src="kanban_view.png" alt="Smart Access Management Kanban View" class="img-fluid w-100"/>
+            </div>
+        </section>
+
+        <!-- Footer Call to Action -->
+        <section class="p-5 rounded-4 bg-primary text-white text-center shadow-md">
+            <h3 class="fw-bold mb-2">Ready to Upgrade Your Odoo Security Infrastructure?</h3>
+            <p class="lead opacity-90 mb-4">Get instant access to Smart Access Management for Odoo 19 with 100% money-back guarantee and dedicated support.</p>
+            <span class="badge bg-white text-primary px-4 py-2 rounded-pill fw-bold fs-6">Available Now on Odoo Apps Store</span>
+        </section>
+
+    </div>
+</body>
+</html>

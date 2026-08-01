@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_access_config_wizard_form" model="ir.ui.view">
+        <field name="name">access.config.wizard.form</field>
+        <field name="model">access.config.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Quick Security Configurator">
+                <sheet>
+                    <div class="oe_title">
+                        <h2>Batch Apply Model Rules</h2>
+                        <p class="text-muted">Select multiple models and instantly apply uniform security permissions across all of them.</p>
+                    </div>
+                    <group>
+                        <field name="access_management_id" readonly="1"/>
+                        <field name="model_ids" widget="many2many_tags" placeholder="Select target models (e.g. Sale Order, CRM Lead, Invoice)..."/>
+                    </group>
+                    <group string="Permissions to Apply">
+                        <group>
+                            <field name="perm_read"/>
+                            <field name="perm_create"/>
+                            <field name="perm_write"/>
+                        </group>
+                        <group>
+                            <field name="perm_unlink"/>
+                            <field name="perm_export"/>
+                            <field name="perm_import"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_apply_quick_rules" string="Apply Rules Now" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_access_config_wizard" model="ir.actions.act_window">
+        <field name="name">Quick Rule Configurator</field>
+        <field name="res_model">access.config.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

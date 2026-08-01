@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Access Management Kanban View (Card Grid Design - Odoo 19 Compliant) -->
+    <record id="view_access_management_kanban" model="ir.ui.view">
+        <field name="name">access.management.kanban</field>
+        <field name="model">access.management</field>
+        <field name="arch" type="xml">
+            <kanban class="o_sam_kanban_view p-3 bg-light">
+                <field name="name"/>
+                <field name="active"/>
+                <field name="color"/>
+                <field name="hide_menu_count"/>
+                <field name="access_model_count"/>
+                <field name="access_field_count"/>
+                <field name="access_button_count"/>
+                <field name="access_chatter_count"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="sam-card p-4 rounded-4 shadow-sm border-0 mb-3 bg-white transition-all">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="sam-badge-icon bg-primary-soft text-primary rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                                        <i class="fa fa-shield fa-lg" title="Security Profile"/>
+                                    </span>
+                                    <h4 class="fw-bold m-0 text-dark sam-profile-title"><field name="name"/></h4>
+                                </div>
+                                <field name="active" widget="boolean_toggle"/>
+                            </div>
+                            
+                            <div class="text-muted small mb-3 sam-users-list">
+                                <i class="fa fa-users me-1 text-primary" title="Target Users"/> <field name="user_ids" widget="many2many_tags"/>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2 pt-3 border-top sam-kpi-badges">
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-bars me-1 text-info" title="Menus"/> <field name="hide_menu_count"/> Menus</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-database me-1 text-warning" title="Models"/> <field name="access_model_count"/> Models</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-pencil me-1 text-success" title="Fields"/> <field name="access_field_count"/> Fields</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-hand-pointer me-1 text-danger" title="Buttons"/> <field name="access_button_count"/> Buttons</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-comments me-1 text-primary" title="Chatter"/> <field name="access_chatter_count"/> Chatter</span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Access Management List View -->
+    <record id="view_access_management_tree" model="ir.ui.view">
+        <field name="name">access.management.list</field>
+        <field name="model">access.management</field>
+        <field name="arch" type="xml">
+            <list string="Smart Access Profiles" class="sam-list-view">
+                <field name="sequence" widget="handle"/>
+                <field name="name" class="fw-bold text-dark"/>
+                <field name="user_ids" widget="many2many_tags"/>
+                <field name="company_ids" widget="many2many_tags"/>
+                <field name="readonly_user"/>
+                <field name="disable_debug"/>
+                <field name="disable_api_access"/>
+                <field name="valid_until"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Access Management Form View (Clean Standard XML + High Quality CSS) -->
+    <record id="view_access_management_form" model="ir.ui.view">
+        <field name="name">access.management.form</field>
+        <field name="model">access.management</field>
+        <field name="arch" type="xml">
+            <form string="Access Security Profile" class="o_smart_access_form sam-form-container w-100">
+                <sheet class="bg-transparent border-0 p-0 w-100">
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    
+                    <!-- Clean Top Header Bar -->
+                    <div class="sam-header-bar d-flex flex-wrap align-items-center justify-content-between gap-3 p-4 rounded-4 shadow-sm bg-white mb-4 border border-light w-100">
+                        <div class="sam-title-block flex-grow-1">
+                            <h1 class="display-6 fw-bold text-dark mb-1"><field name="name" placeholder="e.g. Sales Representative Restricted Profile"/></h1>
+                            <p class="text-secondary mb-0 small fw-medium"><i class="fa fa-info-circle me-1" title="Info"/> Define system safeguards, menu visibility, and model permissions for targeted users.</p>
+                        </div>
+                        
+                        <div class="sam-actions-block d-flex align-items-center gap-2 flex-wrap">
+                            <button name="action_open_quick_wizard" string="⚡ Batch Configurator" type="object" class="btn btn-primary rounded-pill px-4 shadow-sm fw-bold"/>
+                            <button name="action_clone_profile" string="📋 Clone Profile" type="object" class="btn btn-outline-secondary rounded-pill px-3"/>
+                            <field name="active" widget="boolean_toggle" options='{"terminology": "archive"}'/>
+                        </div>
+                    </div>
+
+                    <!-- 2-Row Responsive Grid Layout Utilizing 100% Screen Width -->
+                    <div class="row g-3 mb-4 w-100 m-0">
+                        <!-- Row 1 Left: Target Scope & Users Assignment (Col-lg-7) -->
+                        <div class="col-lg-7 col-md-12 px-1">
+                            <div class="card sam-grid-card sam-target-card shadow-sm border-0 rounded-4 p-4 h-100 bg-white">
+                                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="sam-card-icon-badge bg-primary text-white rounded-3 p-2 shadow-sm">
+                                            <i class="fa fa-users" title="Target Scope"/>
+                                        </span>
+                                        <div>
+                                            <h5 class="fw-bold mb-0 text-dark">Target Scope &amp; Users Assignment</h5>
+                                            <small class="text-muted">Define profile assignment scope across users &amp; multi-company structures</small>
+                                        </div>
+                                    </div>
+                                    <span class="badge bg-primary-soft text-primary rounded-pill px-3 py-1 fw-bold">Primary Scope</span>
+                                </div>
+                                <div class="sam-target-scope-body d-flex flex-column gap-3">
+                                    <div class="alert alert-warning d-flex align-items-center gap-2 p-2 rounded-3 mb-1 small fw-bold" role="alert" invisible="user_ids">
+                                        <i class="fa fa-exclamation-triangle text-warning fa-lg" title="Warning"/>
+                                        <div><strong>No Users Assigned:</strong> Profile is INACTIVE until at least one user is assigned.</div>
+                                    </div>
+                                    <div class="p-3 rounded-3 bg-light border border-light">
+                                        <div class="o_form_label fw-bold text-dark mb-1"><i class="fa fa-user me-1 text-primary"/> Assigned Target Users</div>
+                                        <field name="user_ids" widget="many2many_tags" placeholder="Select target users for this security profile..."/>
+                                    </div>
+                                    <div class="p-3 rounded-3 bg-light border border-light">
+                                        <div class="o_form_label fw-bold text-dark mb-1"><i class="fa fa-building me-1 text-primary"/> Allowed Companies</div>
+                                        <field name="company_ids" widget="many2many_tags" placeholder="Select applicable companies..."/>
+                                    </div>
+                                    <div class="p-3 rounded-3 bg-light border border-light">
+                                        <div class="o_form_label fw-bold text-dark mb-1"><i class="fa fa-file-text me-1 text-primary"/> Security Intent &amp; Role Notes</div>
+                                        <field name="description" placeholder="Notes explaining security intent or role purpose..."/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 1 Right: Global System Safeguards (Col-lg-5 - Standard Odoo Widgets + High Quality CSS) -->
+                        <div class="col-lg-5 col-md-12 px-1">
+                            <div class="card sam-grid-card sam-safeguards-card shadow-sm border-0 rounded-4 p-4 h-100 bg-white">
+                                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="sam-card-icon-badge bg-danger text-white rounded-3 p-2 shadow-sm">
+                                            <i class="fa fa-shield" title="Global Safeguards"/>
+                                        </span>
+                                        <div>
+                                            <h5 class="fw-bold mb-0 text-dark">Global System Safeguards</h5>
+                                            <small class="text-muted">Master threat overrides and system-wide restriction policies</small>
+                                        </div>
+                                    </div>
+                                    <span class="badge bg-danger-soft text-danger rounded-pill px-3 py-1 fw-bold">System Overrides</span>
+                                </div>
+                                
+                                <div class="sam-safeguards-matrix d-flex flex-column gap-2">
+                                    <!-- Safeguard Item 1 -->
+                                    <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="sam-icon-circle bg-danger text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                                <i class="fa fa-lock" title="Read Only"/>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold text-dark mb-0">Global Read-Only Mode</div>
+                                                <small class="text-muted">Locks all models to read-only for assigned users</small>
+                                            </div>
+                                        </div>
+                                        <field name="readonly_user" widget="boolean_toggle"/>
+                                    </div>
+
+                                    <!-- Safeguard Item 2 -->
+                                    <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="sam-icon-circle bg-warning text-dark rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                                <i class="fa fa-bug" title="Block Debug"/>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold text-dark mb-0">Block Developer Mode</div>
+                                                <small class="text-muted">Prevents URL ?debug=1 developer access</small>
+                                            </div>
+                                        </div>
+                                        <field name="disable_debug" widget="boolean_toggle"/>
+                                    </div>
+
+                                    <!-- Safeguard Item 3 -->
+                                    <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="sam-icon-circle bg-danger text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                                <i class="fa fa-ban" title="Block Login"/>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold text-dark mb-0">Revoke Login Access</div>
+                                                <small class="text-muted">Temporarily suspends direct user authentication</small>
+                                            </div>
+                                        </div>
+                                        <field name="disable_login" widget="boolean_toggle"/>
+                                    </div>
+
+                                    <!-- Safeguard Item 4 -->
+                                    <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="sam-icon-circle bg-info text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                                <i class="fa fa-cubes" title="Block Apps"/>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold text-dark mb-0">Block App Installation</div>
+                                                <small class="text-muted">Prevents installing or removing Odoo modules</small>
+                                            </div>
+                                        </div>
+                                        <field name="disable_app_install" widget="boolean_toggle"/>
+                                    </div>
+
+                                    <!-- Safeguard Item 5 -->
+                                    <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="sam-icon-circle bg-secondary text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                                <i class="fa fa-code" title="Block API"/>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold text-dark mb-0">Block External API Access</div>
+                                                <small class="text-muted">Restricts XML-RPC &amp; JSON-RPC external calls</small>
+                                            </div>
+                                        </div>
+                                        <field name="disable_api_access" widget="boolean_toggle"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 Left: Timeline & Network Security (Col-lg-6) -->
+                        <div class="col-lg-6 col-md-12 px-1">
+                            <div class="card sam-grid-card shadow-sm border-0 rounded-4 p-4 h-100 bg-white">
+                                <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                                    <span class="sam-card-icon-badge bg-info text-white rounded-3 p-2">
+                                        <i class="fa fa-clock" title="Timeline &amp; Security Perimeter"/>
+                                    </span>
+                                    <h5 class="fw-bold mb-0 text-dark">Timeline Schedule &amp; Network Perimeter</h5>
+                                </div>
+                                <group class="sam-group-compact m-0">
+                                    <field name="valid_from"/>
+                                    <field name="valid_until"/>
+                                    <field name="allowed_ip_addresses" placeholder="e.g. 192.168.1.100, 10.0.0.0/24"/>
+                                </group>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 Right: Executive Security Summary (Col-lg-6) -->
+                        <div class="col-lg-6 col-md-12 px-1">
+                            <div class="card sam-grid-card shadow-sm border-0 rounded-4 p-4 h-100 bg-white sam-summary-card">
+                                <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                                    <span class="sam-card-icon-badge bg-warning text-white rounded-3 p-2">
+                                        <i class="fa fa-bar-chart" title="Security Summary"/>
+                                    </span>
+                                    <h5 class="fw-bold mb-0 text-dark">Security Restriction Summary</h5>
+                                </div>
+                                <div class="sam-kpi-summary-content d-flex flex-column justify-content-between gap-2 pt-1">
+                                    <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-light">
+                                        <span class="small fw-bold text-dark"><i class="fa fa-bars text-info me-1" title="Menus"/> Menus Hidden:</span>
+                                        <span class="badge bg-info text-white rounded-pill px-3 py-1"><field name="hide_menu_count"/></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-light">
+                                        <span class="small fw-bold text-dark"><i class="fa fa-database text-warning me-1" title="Models"/> Models Restricted:</span>
+                                        <span class="badge bg-warning text-dark rounded-pill px-3 py-1"><field name="access_model_count"/></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-light">
+                                        <span class="small fw-bold text-dark"><i class="fa fa-pencil text-success me-1" title="Fields"/> Fields Restricted:</span>
+                                        <span class="badge bg-success text-white rounded-pill px-3 py-1"><field name="access_field_count"/></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-light">
+                                        <span class="small fw-bold text-dark"><i class="fa fa-hand-pointer text-danger me-1" title="Buttons"/> Buttons Restricted:</span>
+                                        <span class="badge bg-danger text-white rounded-pill px-3 py-1"><field name="access_button_count"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notebook Tabs Container in Elevated Card -->
+                    <div class="sam-tabs-card card shadow-sm border-0 rounded-4 p-4 bg-white w-100">
+                        <notebook class="sam-custom-notebook">
+                            <!-- Tab 1: Assigned Users -->
+                            <page string="👤 Assigned Users" name="users" class="pt-3">
+                                <div class="sam-table-wrapper w-100 overflow-auto">
+                                    <field name="user_ids" class="w-100">
+                                        <list class="rounded-3 border sam-list-table">
+                                            <field name="name" string="User Name"/>
+                                            <field name="login" string="Login / Email"/>
+                                            <field name="company_id" string="Primary Company"/>
+                                            <field name="lang" string="Language"/>
+                                            <field name="active" widget="boolean_toggle"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </page>
+
+                            <!-- Tab 2: Menus -->
+                            <page string="🙈 Menu Visibility" name="menus" class="pt-3">
+                                <div class="sam-table-wrapper w-100 overflow-auto">
+                                    <field name="hide_menu_ids" class="w-100">
+                                        <list editable="bottom" class="rounded-3 border sam-list-table">
+                                            <field name="menu_id" string="Menu Item"/>
+                                            <field name="full_name" string="Full Menu Hierarchy"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </page>
+
+                            <!-- Tab 3: Models & Actions -->
+                            <page string="🛡️ Model Access" name="models" class="pt-3">
+                                <div class="sam-table-wrapper w-100 overflow-auto">
+                                    <field name="access_model_ids" class="w-100">
+                                        <list editable="bottom" class="rounded-3 border sam-list-table">
+                                            <field name="model_id" string="Target Model"/>
+                                            <field name="perm_read" string="Read" help="Allow Reading records"/>
+                                            <field name="perm_create" string="Create" help="Allow Creating records"/>
+                                            <field name="perm_write" string="Edit" help="Allow Editing records"/>
+                                            <field name="perm_unlink" string="Delete" help="Allow Deleting records"/>
+                                            <field name="perm_archive" string="Archive" help="Allow Archiving records"/>
+                                            <field name="perm_duplicate" string="Duplicate" help="Allow Duplicating records"/>
+                                            <field name="perm_export" string="Export" help="Allow Exporting data"/>
+                                            <field name="perm_import" string="Import" help="Allow Importing data"/>
+                                            <field name="hide_kanban" string="Kanban" help="Hide Kanban View"/>
+                                            <field name="hide_list" string="List" help="Hide List View"/>
+                                            <field name="hide_pivot" string="Pivot" help="Hide Pivot View"/>
+                                            <field name="hide_graph" string="Graph" help="Hide Graph View"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </page>
+
+                            <!-- Tab 4: Field Permissions -->
+                            <page string="✏️ Field Controls" name="fields" class="pt-3">
+                                <div class="sam-table-wrapper w-100 overflow-auto">
+                                    <field name="access_field_ids" class="w-100">
+                                        <list editable="bottom" class="rounded-3 border sam-list-table">
+                                            <field name="model_id" string="Target Model"/>
+                                            <field name="field_id" domain="[('model_id', '=', model_id)]" string="Target Field"/>
+                                            <field name="mode" string="Restriction Mode"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </page>
+
+                            <!-- Tab 5: Buttons & Tabs -->
+                            <page string="🔘 Buttons &amp; Tabs" name="buttons" class="pt-3">
+                                <div class="sam-table-wrapper w-100 overflow-auto">
+                                    <field name="access_button_ids" class="w-100">
+                                        <list editable="bottom" class="rounded-3 border sam-list-table">
+                                            <field name="model_id" string="Target Model"/>
+                                            <field name="button_type" string="Button Type"/>
+                                            <field name="button_name" string="Technical Name / String" placeholder="Technical name (name=) or String label"/>
+                                            <field name="title" string="Description" placeholder="Description (e.g. Hide Confirm Sale button)"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </page>
+
+                            <!-- Tab 6: Chatter Restrictions -->
+                            <page string="💬 Chatter Controls" name="chatter" class="pt-3">
+                                <div class="sam-table-wrapper w-100 overflow-auto">
+                                    <field name="access_chatter_ids" class="w-100">
+                                        <list editable="bottom" class="rounded-3 border sam-list-table">
+                                            <field name="model_id" string="Target Model"/>
+                                            <field name="hide_chatter" string="Hide Chatter"/>
+                                            <field name="hide_send_mail" string="Hide Send Message"/>
+                                            <field name="hide_log_notes" string="Hide Log Note"/>
+                                            <field name="hide_schedule_activity" string="Hide Activity"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </page>
+
+                            <!-- Tab 7: Record Domain Rules -->
+                            <page string="🔒 Domain Rules" name="domains" class="pt-3">
+                                <div class="sam-table-wrapper w-100 overflow-auto">
+                                    <field name="access_domain_ids" class="w-100">
+                                        <list editable="bottom" class="rounded-3 border sam-list-table">
+                                            <field name="model_id" string="Target Model"/>
+                                            <field name="domain" string="Domain Filter" placeholder="[('user_id', '=', user.id)]"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </page>
+
+                            <!-- Tab 8: Audit Log -->
+                            <page string="📜 Audit Trail" name="audit" class="pt-3">
+                                <div class="sam-table-wrapper w-100 overflow-auto">
+                                    <field name="audit_log_ids" readonly="1" class="w-100">
+                                        <list class="rounded-3 border sam-list-table">
+                                            <field name="create_date" string="Timestamp"/>
+                                            <field name="user_id" string="Executed By"/>
+                                            <field name="action_type" string="Action Type"/>
+                                            <field name="details" string="Event Details"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </page>
+                        </notebook>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_smart_access_management" model="ir.actions.act_window">
+        <field name="name">Access Profiles</field>
+        <field name="res_model">access.management</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Smart Access Management Profile!
+            </p>
+            <p>
+                Group menu, model, field, button, and chatter restrictions into clean, predictable security profiles.
+            </p>
+        </field>
+    </record>
+</odoo>

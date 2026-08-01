@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Preset 1: Global Read-Only Profile -->
+        <record id="preset_readonly_profile" model="access.management">
+            <field name="name">Preset: Global Read-Only User</field>
+            <field name="readonly_user">True</field>
+            <field name="disable_debug">True</field>
+            <field name="description">Template: Forces global read-only mode across all models and disables developer mode.</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <!-- Preset 2: Restricted Sales Representative Profile -->
+        <record id="preset_sales_restricted_profile" model="access.management">
+            <field name="name">Preset: Restricted Sales Representative</field>
+            <field name="disable_debug">True</field>
+            <field name="description">Template: Restricts export, developer mode, and sensitive customer fields for sales reps.</field>
+            <field name="sequence">2</field>
+        </record>
+    </data>
+</odoo>
