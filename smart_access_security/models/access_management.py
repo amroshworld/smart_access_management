@@ -103,17 +103,17 @@ class AccessManagement(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        self.env['ir.ui.menu'].clear_caches()
+        self.env.registry.clear_cache()
         return records
 
     def write(self, vals):
         res = super().write(vals)
-        self.env['ir.ui.menu'].clear_caches()
+        self.env.registry.clear_cache()
         return res
 
     def unlink(self):
         res = super().unlink()
-        self.env['ir.ui.menu'].clear_caches()
+        self.env.registry.clear_cache()
         return res
 
     def action_open_quick_wizard(self):
