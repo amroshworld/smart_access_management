@@ -23,7 +23,6 @@
 /* Kanban Cards Styling */
 .o_sam_kanban_view {
   background-color: var(--sam-bg-surface) !important;
-  overflow-y: auto !important;
 }
 
 .sam-card {
@@ -44,7 +43,7 @@
   }
 }
 
-/* Form Container & Full Width Smooth Scroll Reset */
+/* Form Container Reset - Preserves Native Odoo .o_content Document Scrollbar */
 .o_form_view.o_smart_access_form,
 .o_smart_access_form .o_form_sheet_bg,
 .o_smart_access_form .o_form_renderer {
@@ -52,8 +51,6 @@
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  height: auto !important;
-  overflow: visible !important;
 }
 
 .sam-form-container {
@@ -61,8 +58,6 @@
   padding: 1.25rem !important;
   width: 100% !important;
   max-width: 100% !important;
-  height: auto !important;
-  overflow-y: visible !important;
 
   /* Reset Odoo default absolute floats to prevent header overlap */
   .oe_title {
@@ -103,7 +98,6 @@
   box-shadow: var(--sam-shadow-sm) !important;
   border: 1px solid var(--sam-border-color) !important;
   transition: all 0.2s ease;
-  height: auto !important;
 
   &:hover {
     box-shadow: var(--sam-shadow-md) !important;
@@ -157,8 +151,6 @@
   border-radius: var(--sam-radius-lg) !important;
   box-shadow: var(--sam-shadow-sm) !important;
   border: 1px solid var(--sam-border-color) !important;
-  height: auto !important;
-  overflow: visible !important;
 }
 
 .sam-custom-notebook {
@@ -190,14 +182,12 @@
 
   .tab-content {
     padding-top: 1.25rem !important;
-    overflow: visible !important;
   }
 }
 
 /* Responsive Table Wrapper & Non-Truncated Headers */
 .sam-table-wrapper {
   overflow-x: auto !important;
-  overflow-y: visible !important;
   width: 100% !important;
   max-width: 100% !important;
   border-radius: var(--sam-radius-md);
