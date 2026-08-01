@@ -19,8 +19,8 @@
                         <div class="sam-card p-4 rounded-4 shadow-sm border-0 mb-3 bg-white transition-all">
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <div class="d-flex align-items-center gap-2">
-                                    <span class="sam-badge-icon bg-primary-soft text-primary rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
-                                        <i class="fa fa-shield fa-lg" title="Security Profile"/>
+                                    <span class="sam-badge-icon bg-primary-soft text-primary rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                        <span class="fa fa-shield fa-lg" title="Security Profile"></span>
                                     </span>
                                     <h4 class="fw-bold m-0 text-dark sam-profile-title"><field name="name"/></h4>
                                 </div>
@@ -28,15 +28,15 @@
                             </div>
                             
                             <div class="text-muted small mb-3 sam-users-list">
-                                <i class="fa fa-users me-1 text-primary" title="Target Users"/> <field name="user_ids" widget="many2many_tags"/>
+                                <span class="fa fa-users me-1 text-primary" title="Target Users"></span> <field name="user_ids" widget="many2many_tags"/>
                             </div>
 
                             <div class="d-flex flex-wrap gap-2 pt-3 border-top sam-kpi-badges">
-                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-bars me-1 text-info" title="Menus"/> <field name="hide_menu_count"/> Menus</span>
-                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-database me-1 text-warning" title="Models"/> <field name="access_model_count"/> Models</span>
-                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-pencil me-1 text-success" title="Fields"/> <field name="access_field_count"/> Fields</span>
-                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-hand-pointer me-1 text-danger" title="Buttons"/> <field name="access_button_count"/> Buttons</span>
-                                <span class="badge sam-badge-light text-dark border px-2 py-1"><i class="fa fa-comments me-1 text-primary" title="Chatter"/> <field name="access_chatter_count"/> Chatter</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><span class="fa fa-bars me-1 text-info" title="Menus"></span> <field name="hide_menu_count"/> Menus</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><span class="fa fa-database me-1 text-warning" title="Models"></span> <field name="access_model_count"/> Models</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><span class="fa fa-pencil me-1 text-success" title="Fields"></span> <field name="access_field_count"/> Fields</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><span class="fa fa-hand-pointer-o me-1 text-danger" title="Buttons"></span> <field name="access_button_count"/> Buttons</span>
+                                <span class="badge sam-badge-light text-dark border px-2 py-1"><span class="fa fa-comments me-1 text-primary" title="Chatter"></span> <field name="access_chatter_count"/> Chatter</span>
                             </div>
                         </div>
                     </t>
@@ -64,7 +64,7 @@
         </field>
     </record>
 
-    <!-- Access Management Form View (Clean Standard XML + High Quality CSS) -->
+    <!-- Access Management Form View (Clean Standard XML + Explicit Icon Spans) -->
     <record id="view_access_management_form" model="ir.ui.view">
         <field name="name">access.management.form</field>
         <field name="model">access.management</field>
@@ -73,11 +73,11 @@
                 <sheet class="bg-transparent border-0 p-0 w-100">
                     <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
                     
-                    <!-- Clean Top Header Bar -->
+                    <!-- Top Header Bar -->
                     <div class="sam-header-bar d-flex flex-wrap align-items-center justify-content-between gap-3 p-4 rounded-4 shadow-sm bg-white mb-4 border border-light w-100">
                         <div class="sam-title-block flex-grow-1">
                             <h1 class="display-6 fw-bold text-dark mb-1"><field name="name" placeholder="e.g. Sales Representative Restricted Profile"/></h1>
-                            <p class="text-secondary mb-0 small fw-medium"><i class="fa fa-info-circle me-1" title="Info"/> Define system safeguards, menu visibility, and model permissions for targeted users.</p>
+                            <p class="text-secondary mb-0 small fw-medium"><span class="fa fa-info-circle me-1 text-primary" title="Info"></span> Define system safeguards, menu visibility, and model permissions for targeted users.</p>
                         </div>
                         
                         <div class="sam-actions-block d-flex align-items-center gap-2 flex-wrap">
@@ -89,13 +89,13 @@
 
                     <!-- 2-Row Responsive Grid Layout Utilizing 100% Screen Width -->
                     <div class="row g-3 mb-4 w-100 m-0">
-                        <!-- Row 1 Left: Target Scope & Users Assignment (Col-lg-7) -->
+                        <!-- Card 1: Target Scope & Users Assignment -->
                         <div class="col-lg-7 col-md-12 px-1">
                             <div class="card sam-grid-card sam-target-card shadow-sm border-0 rounded-4 p-4 h-100 bg-white">
                                 <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
                                     <div class="d-flex align-items-center gap-2">
-                                        <span class="sam-card-icon-badge bg-primary text-white rounded-3 p-2 shadow-sm">
-                                            <i class="fa fa-users" title="Target Scope"/>
+                                        <span class="sam-card-icon-badge bg-primary text-white rounded-3 p-2 shadow-sm d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                            <span class="fa fa-users fa-lg" title="Target Scope"></span>
                                         </span>
                                         <div>
                                             <h5 class="fw-bold mb-0 text-dark">Target Scope &amp; Users Assignment</h5>
@@ -106,32 +106,32 @@
                                 </div>
                                 <div class="sam-target-scope-body d-flex flex-column gap-3">
                                     <div class="alert alert-warning d-flex align-items-center gap-2 p-2 rounded-3 mb-1 small fw-bold" role="alert" invisible="user_ids">
-                                        <i class="fa fa-exclamation-triangle text-warning fa-lg" title="Warning"/>
+                                        <span class="fa fa-exclamation-triangle text-warning fa-lg" title="Warning"></span>
                                         <div><strong>No Users Assigned:</strong> Profile is INACTIVE until at least one user is assigned.</div>
                                     </div>
                                     <div class="p-3 rounded-3 bg-light border border-light">
-                                        <div class="o_form_label fw-bold text-dark mb-1"><i class="fa fa-user me-1 text-primary"/> Assigned Target Users</div>
+                                        <div class="o_form_label fw-bold text-dark mb-1"><span class="fa fa-user me-1 text-primary"></span> Assigned Target Users</div>
                                         <field name="user_ids" widget="many2many_tags" placeholder="Select target users for this security profile..."/>
                                     </div>
                                     <div class="p-3 rounded-3 bg-light border border-light">
-                                        <div class="o_form_label fw-bold text-dark mb-1"><i class="fa fa-building me-1 text-primary"/> Allowed Companies</div>
+                                        <div class="o_form_label fw-bold text-dark mb-1"><span class="fa fa-building me-1 text-primary"></span> Allowed Companies</div>
                                         <field name="company_ids" widget="many2many_tags" placeholder="Select applicable companies..."/>
                                     </div>
                                     <div class="p-3 rounded-3 bg-light border border-light">
-                                        <div class="o_form_label fw-bold text-dark mb-1"><i class="fa fa-file-text me-1 text-primary"/> Security Intent &amp; Role Notes</div>
+                                        <div class="o_form_label fw-bold text-dark mb-1"><span class="fa fa-file-text-o me-1 text-primary"></span> Security Intent &amp; Role Notes</div>
                                         <field name="description" placeholder="Notes explaining security intent or role purpose..."/>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Row 1 Right: Global System Safeguards (Col-lg-5 - Standard Odoo Widgets + High Quality CSS) -->
+                        <!-- Card 2: Global System Safeguards -->
                         <div class="col-lg-5 col-md-12 px-1">
                             <div class="card sam-grid-card sam-safeguards-card shadow-sm border-0 rounded-4 p-4 h-100 bg-white">
                                 <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
                                     <div class="d-flex align-items-center gap-2">
-                                        <span class="sam-card-icon-badge bg-danger text-white rounded-3 p-2 shadow-sm">
-                                            <i class="fa fa-shield" title="Global Safeguards"/>
+                                        <span class="sam-card-icon-badge bg-danger text-white rounded-3 p-2 shadow-sm d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                            <span class="fa fa-shield fa-lg" title="Global Safeguards"></span>
                                         </span>
                                         <div>
                                             <h5 class="fw-bold mb-0 text-dark">Global System Safeguards</h5>
@@ -146,7 +146,7 @@
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-danger text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                                                <i class="fa fa-lock" title="Read Only"/>
+                                                <span class="fa fa-lock" title="Read Only"></span>
                                             </div>
                                             <div>
                                                 <div class="fw-bold text-dark mb-0">Global Read-Only Mode</div>
@@ -160,7 +160,7 @@
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-warning text-dark rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                                                <i class="fa fa-bug" title="Block Debug"/>
+                                                <span class="fa fa-bug" title="Block Debug"></span>
                                             </div>
                                             <div>
                                                 <div class="fw-bold text-dark mb-0">Block Developer Mode</div>
@@ -174,7 +174,7 @@
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-danger text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                                                <i class="fa fa-ban" title="Block Login"/>
+                                                <span class="fa fa-ban" title="Block Login"></span>
                                             </div>
                                             <div>
                                                 <div class="fw-bold text-dark mb-0">Revoke Login Access</div>
@@ -188,7 +188,7 @@
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-info text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                                                <i class="fa fa-cubes" title="Block Apps"/>
+                                                <span class="fa fa-cubes" title="Block Apps"></span>
                                             </div>
                                             <div>
                                                 <div class="fw-bold text-dark mb-0">Block App Installation</div>
@@ -202,7 +202,7 @@
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-secondary text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                                                <i class="fa fa-code" title="Block API"/>
+                                                <span class="fa fa-code" title="Block API"></span>
                                             </div>
                                             <div>
                                                 <div class="fw-bold text-dark mb-0">Block External API Access</div>
@@ -215,12 +215,12 @@
                             </div>
                         </div>
 
-                        <!-- Row 2 Left: Timeline & Network Security (Col-lg-6) -->
+                        <!-- Card 3: Timeline Schedule & Network Perimeter -->
                         <div class="col-lg-6 col-md-12 px-1">
                             <div class="card sam-grid-card shadow-sm border-0 rounded-4 p-4 h-100 bg-white">
                                 <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
-                                    <span class="sam-card-icon-badge bg-info text-white rounded-3 p-2">
-                                        <i class="fa fa-clock" title="Timeline &amp; Security Perimeter"/>
+                                    <span class="sam-card-icon-badge bg-info text-white rounded-3 p-2 d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                        <span class="fa fa-clock-o fa-lg" title="Timeline &amp; Security Perimeter"></span>
                                     </span>
                                     <h5 class="fw-bold mb-0 text-dark">Timeline Schedule &amp; Network Perimeter</h5>
                                 </div>
@@ -232,30 +232,30 @@
                             </div>
                         </div>
 
-                        <!-- Row 2 Right: Executive Security Summary (Col-lg-6) -->
+                        <!-- Card 4: Security Restriction Summary -->
                         <div class="col-lg-6 col-md-12 px-1">
                             <div class="card sam-grid-card shadow-sm border-0 rounded-4 p-4 h-100 bg-white sam-summary-card">
                                 <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
-                                    <span class="sam-card-icon-badge bg-warning text-white rounded-3 p-2">
-                                        <i class="fa fa-bar-chart" title="Security Summary"/>
+                                    <span class="sam-card-icon-badge bg-warning text-white rounded-3 p-2 d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                        <span class="fa fa-bar-chart-o fa-lg" title="Security Summary"></span>
                                     </span>
                                     <h5 class="fw-bold mb-0 text-dark">Security Restriction Summary</h5>
                                 </div>
                                 <div class="sam-kpi-summary-content d-flex flex-column justify-content-between gap-2 pt-1">
                                     <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-light">
-                                        <span class="small fw-bold text-dark"><i class="fa fa-bars text-info me-1" title="Menus"/> Menus Hidden:</span>
+                                        <span class="small fw-bold text-dark"><span class="fa fa-bars text-info me-1" title="Menus"></span> Menus Hidden:</span>
                                         <span class="badge bg-info text-white rounded-pill px-3 py-1"><field name="hide_menu_count"/></span>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-light">
-                                        <span class="small fw-bold text-dark"><i class="fa fa-database text-warning me-1" title="Models"/> Models Restricted:</span>
+                                        <span class="small fw-bold text-dark"><span class="fa fa-database text-warning me-1" title="Models"></span> Models Restricted:</span>
                                         <span class="badge bg-warning text-dark rounded-pill px-3 py-1"><field name="access_model_count"/></span>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-light">
-                                        <span class="small fw-bold text-dark"><i class="fa fa-pencil text-success me-1" title="Fields"/> Fields Restricted:</span>
+                                        <span class="small fw-bold text-dark"><span class="fa fa-pencil text-success me-1" title="Fields"></span> Fields Restricted:</span>
                                         <span class="badge bg-success text-white rounded-pill px-3 py-1"><field name="access_field_count"/></span>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-light">
-                                        <span class="small fw-bold text-dark"><i class="fa fa-hand-pointer text-danger me-1" title="Buttons"/> Buttons Restricted:</span>
+                                        <span class="small fw-bold text-dark"><span class="fa fa-hand-pointer-o text-danger me-1" title="Buttons"></span> Buttons Restricted:</span>
                                         <span class="badge bg-danger text-white rounded-pill px-3 py-1"><field name="access_button_count"/></span>
                                     </div>
                                 </div>

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class AccessModel(models.Model):
     _name = 'access.model'
@@ -31,3 +32,9 @@ class AccessModel(models.Model):
     # Reports & Server Actions
     hide_report_ids = fields.Many2many('ir.actions.report', string='Hide Reports', help='Select print reports to hide from the Print menu.')
     hide_action_ids = fields.Many2many('ir.actions.actions', string='Hide Actions', help='Select action menu items to hide for this model.')
+
+    @api.constrains('model_id')
+    def _check_model_id(self):
+        for rec in self:
+            if not rec.model_id:
+                raise ValidationError(_("Please select a 'Target Model' for all entries in the Model Access list before saving."))

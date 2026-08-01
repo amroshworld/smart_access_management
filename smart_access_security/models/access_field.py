@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class AccessField(models.Model):
     _name = 'access.field'
@@ -22,3 +23,9 @@ class AccessField(models.Model):
     @api.onchange('model_id')
     def _onchange_model_id(self):
         self.field_id = False
+
+    @api.constrains('model_id', 'field_id')
+    def _check_field_and_model(self):
+        for rec in self:
+            if not rec.model_id or not rec.field_id:
+                raise ValidationError(_("Please select both a 'Target Model' and a 'Target Field' for all entries in the Field Controls list."))

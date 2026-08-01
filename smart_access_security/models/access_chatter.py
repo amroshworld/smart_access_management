@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class AccessChatter(models.Model):
     _name = 'access.chatter'
@@ -14,3 +15,9 @@ class AccessChatter(models.Model):
     hide_log_notes = fields.Boolean(string='Hide "Log Note"', help='Hides the internal Log Note composer.')
     hide_schedule_activity = fields.Boolean(string='Hide "Schedule Activity"', help='Hides the Activity button in chatter.')
     hide_followers = fields.Boolean(string='Hide Followers', help='Hides the followers section in chatter.')
+
+    @api.constrains('model_id')
+    def _check_chatter_model(self):
+        for rec in self:
+            if not rec.model_id:
+                raise ValidationError(_("Please select a 'Target Model' for all entries in the Chatter Controls list."))

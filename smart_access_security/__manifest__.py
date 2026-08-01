@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Smart Access Management (Enterprise Security Suite)',
+    'name': 'Smart Access Security (Enterprise Security Suite)',
     'version': '19.0.1.0.0',
     'category': 'Administration/Security',
     'summary': 'Modern SaaS-Style Security Profile Manager, Menu Hiding, Model & Field Rules, System Safeguards',
     'description': """
-Smart Access Management (Enterprise Modern Edition)
-===================================================
+Smart Access Security & Permissions Suite (Enterprise Edition)
+==============================================================
 A sleek, highly intuitive, and enterprise-grade security profile manager for Odoo 19.
 
 Key Features & Business Benefits:
@@ -38,8 +38,8 @@ Key Features & Business Benefits:
     ],
     'assets': {
         'web.assets_backend': [
-            'smart_access_management/static/src/scss/access_management.scss',
-            'smart_access_management/static/src/js/dev_mode_guard.js',
+            'smart_access_security/static/src/scss/access_management.scss',
+            'smart_access_security/static/src/js/dev_mode_guard.js',
         ],
     },
     'images': ['static/description/main_screenshot.png'],

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class AccessButton(models.Model):
     _name = 'access.button'
@@ -20,3 +21,9 @@ class AccessButton(models.Model):
         help='Technical name (name="..."), string label (string="..."), or icon/class of the button or tab to hide.'
     )
     title = fields.Char(string='Description / Purpose')
+
+    @api.constrains('model_id', 'button_name')
+    def _check_button_fields(self):
+        for rec in self:
+            if not rec.model_id or not rec.button_name:
+                raise ValidationError(_("Please select a 'Target Model' and specify a 'Technical Identifier' for all entries in the Buttons & Tabs list."))
