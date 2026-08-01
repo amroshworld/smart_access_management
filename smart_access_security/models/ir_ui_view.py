@@ -6,11 +6,11 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-# Core framework & admin models that must NEVER be locked
+# Core internal system models that must NEVER be mutated to avoid breaking Odoo core engine
 ADMIN_SYSTEM_MODELS = (
-    'access.management', 'access.menu', 'access.model', 'access.field',
-    'access.button', 'access.chatter', 'access.domain', 'access.audit.log',
-    'access.config.wizard', 'res.users', 'res.company', 'res.groups',
+    'access.menu', 'access.model', 'access.field', 'access.button',
+    'access.chatter', 'access.domain', 'access.audit.log', 'access.config.wizard',
+    'res.users', 'res.company', 'res.groups',
     'ir.model', 'ir.model.fields', 'ir.ui.view', 'ir.ui.menu',
     'ir.actions.act_window', 'ir.module.module', 'ir.attachment', 'ir.asset'
 )
@@ -103,7 +103,7 @@ class IrUiView(models.Model):
         res = super(IrUiView, self)._postprocess_access(model, node, access)
         
         user = self.env.user
-        if model in ADMIN_SYSTEM_MODELS or model.startswith('access.') or model.startswith('ir.'):
+        if model in ADMIN_SYSTEM_MODELS or model.startswith('ir.'):
             return res
 
         profiles = self.env['access.management'].get_user_access_profiles(user)

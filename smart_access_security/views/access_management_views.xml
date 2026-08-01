@@ -350,9 +350,10 @@
                                     <field name="access_button_ids" class="w-100">
                                         <list editable="bottom" class="rounded-3 border sam-list-table">
                                             <field name="model_id" string="Target Model"/>
-                                            <field name="button_type" string="Button Type"/>
-                                            <field name="button_name" string="Technical Name / String" placeholder="Technical name (name=) or String label"/>
-                                            <field name="title" string="Description" placeholder="Description (e.g. Hide Confirm Sale button)"/>
+                                            <field name="button_selection" string="🔍 Auto-Discovered Button / Tab"/>
+                                            <field name="button_type" string="Type"/>
+                                            <field name="button_name" string="Technical Identifier" placeholder="Custom name/identifier"/>
+                                            <field name="title" string="Description" placeholder="Description"/>
                                         </list>
                                     </field>
                                 </div>
