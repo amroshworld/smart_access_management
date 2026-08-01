@@ -31,7 +31,6 @@ class BaseModelSecurity(models.AbstractModel):
         if not profiles:
             return res
 
-        # Bypass superuser/system admin ONLY IF none of the active profiles apply to admin
         if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
             if not any(p.apply_to_admin for p in profiles):
                 return res
@@ -186,6 +185,41 @@ class IrUiView(models.Model):
 
 class IrUiMenu(models.Model):
     _inherit = 'ir.ui.menu'
+
+    @api.model
+    def _load_menus_blacklist(self):
+        """ Add profile-hidden menus to Odoo's menu blacklist """
+        res = super(IrUiMenu, self)._load_menus_blacklist()
+        user = self.env.user
+        profiles = self.env['access.management'].get_user_access_profiles(user)
+        if not profiles:
+            return res
+
+        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
+            if not any(p.apply_to_admin for p in profiles):
+                return res
+
+        hidden_menu_ids = profiles.mapped('hide_menu_ids.menu_id.id')
+        if hidden_menu_ids:
+            res = list(set(res) | set(hidden_menu_ids))
+        return res
+
+    def _filter_visible_menus(self):
+        """ Filter out hidden menus for restricted users during menu load """
+        res = super(IrUiMenu, self)._filter_visible_menus()
+        user = self.env.user
+        profiles = self.env['access.management'].get_user_access_profiles(user)
+        if not profiles:
+            return res
+
+        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
+            if not any(p.apply_to_admin for p in profiles):
+                return res
+
+        hidden_menu_ids = profiles.mapped('hide_menu_ids.menu_id.id')
+        if hidden_menu_ids:
+            res = res.filtered(lambda m: m.id not in hidden_menu_ids)
+        return res
 
     @api.model
     def search(self, domain, offset=0, limit=None, order=None):
