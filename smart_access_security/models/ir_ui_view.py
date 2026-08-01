@@ -6,7 +6,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-# List of core framework & admin models that must NEVER be blocked by security profiles
+# Core framework & admin models that must NEVER be locked
 ADMIN_SYSTEM_MODELS = (
     'access.management', 'access.menu', 'access.model', 'access.field',
     'access.button', 'access.chatter', 'access.domain', 'access.audit.log',
@@ -23,17 +23,18 @@ class BaseModelSecurity(models.AbstractModel):
         """ Enforce backend RPC/API access rights for active Access Management profiles """
         res = super(BaseModelSecurity, self).check_access_rights(operation, raise_exception=raise_exception)
         
-        # Bypass superuser, system environment, and administration models
         user = self.env.user
-        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
-            return res
-
         if self._name in ADMIN_SYSTEM_MODELS or self._name.startswith('access.') or self._name.startswith('ir.'):
             return res
 
         profiles = self.env['access.management'].get_user_access_profiles(user)
         if not profiles:
             return res
+
+        # Bypass superuser/system admin ONLY IF none of the active profiles apply to admin
+        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
+            if not any(p.apply_to_admin for p in profiles):
+                return res
 
         # 1. Global Read-Only User Enforcement for target business models
         if any(p.readonly_user for p in profiles) and operation in ('create', 'write', 'unlink'):
@@ -69,9 +70,6 @@ class BaseModelSecurity(models.AbstractModel):
         res = super(BaseModelSecurity, self).fields_get(allfields=allfields, attributes=attributes)
         
         user = self.env.user
-        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
-            return res
-
         if self._name in ADMIN_SYSTEM_MODELS or self._name.startswith('access.') or self._name.startswith('ir.'):
             return res
 
@@ -79,14 +77,18 @@ class BaseModelSecurity(models.AbstractModel):
         if not profiles:
             return res
 
+        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
+            if not any(p.apply_to_admin for p in profiles):
+                return res
+
         field_rules = profiles.mapped('access_field_ids').filtered(lambda r: r.model_id.model == self._name)
         for f_rule in field_rules:
             fname = f_rule.field_name
             if fname in res:
-                if f_rule.mode == 'readonly':
-                    res[fname]['readonly'] = True
-                elif f_rule.mode == 'invisible':
+                if f_rule.mode == 'invisible':
                     res[fname]['invisible'] = True
+                elif f_rule.mode == 'readonly':
+                    res[fname]['readonly'] = True
                 elif f_rule.mode == 'required':
                     res[fname]['required'] = True
 
@@ -102,15 +104,16 @@ class IrUiView(models.Model):
         res = super(IrUiView, self)._postprocess_access(model, node, access)
         
         user = self.env.user
-        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
-            return res
-
         if model in ADMIN_SYSTEM_MODELS or model.startswith('access.') or model.startswith('ir.'):
             return res
 
         profiles = self.env['access.management'].get_user_access_profiles(user)
         if not profiles:
             return res
+
+        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
+            if not any(p.apply_to_admin for p in profiles):
+                return res
 
         # 1. Global Read-Only User
         if any(p.readonly_user for p in profiles):
@@ -137,7 +140,7 @@ class IrUiView(models.Model):
             if not rule.perm_export:
                 node.set('export_xlsx', 'false')
 
-        # 2. Patch Field Rules (both form invisible and list column_invisible)
+        # 2. Patch Field Rules
         for f_rule in field_rules:
             fname = f_rule.field_name
             for field_node in node.xpath(f"//field[@name='{fname}']"):
@@ -189,12 +192,14 @@ class IrUiMenu(models.Model):
         """ Filter out hidden menus for restricted users """
         res = super(IrUiMenu, self).search(domain, offset=offset, limit=limit, order=order)
         user = self.env.user
-        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
-            return res
 
         profiles = self.env['access.management'].get_user_access_profiles(user)
         if not profiles:
             return res
+
+        if self.env.su or user._is_superuser() or user.has_group('base.group_system'):
+            if not any(p.apply_to_admin for p in profiles):
+                return res
 
         hidden_menu_ids = profiles.mapped('hide_menu_ids.menu_id.id')
         if hidden_menu_ids:

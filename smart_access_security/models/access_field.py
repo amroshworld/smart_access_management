@@ -29,3 +29,14 @@ class AccessField(models.Model):
         for rec in self:
             if not rec.model_id or not rec.field_id:
                 raise ValidationError(_("Please select both a 'Target Model' and a 'Target Field' for all entries in the Field Controls list."))
+
+
+class IrModelFieldsExtension(models.Model):
+    _inherit = 'ir.model.fields'
+
+    @api.depends('field_description', 'name')
+    def _compute_display_name(self):
+        super()._compute_display_name()
+        for field in self:
+            if field.field_description and field.name:
+                field.display_name = f"{field.field_description} ({field.name})"

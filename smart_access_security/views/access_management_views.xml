@@ -55,6 +55,7 @@
                 <field name="name" class="fw-bold text-dark"/>
                 <field name="user_ids" widget="many2many_tags"/>
                 <field name="company_ids" widget="many2many_tags"/>
+                <field name="apply_to_admin"/>
                 <field name="readonly_user"/>
                 <field name="disable_debug"/>
                 <field name="disable_api_access"/>
@@ -64,7 +65,7 @@
         </field>
     </record>
 
-    <!-- Access Management Form View (Clean Standard XML + Explicit Icon Spans) -->
+    <!-- Access Management Form View -->
     <record id="view_access_management_form" model="ir.ui.view">
         <field name="name">access.management.form</field>
         <field name="model">access.management</field>
@@ -142,7 +143,21 @@
                                 </div>
                                 
                                 <div class="sam-safeguards-matrix d-flex flex-column gap-2">
-                                    <!-- Safeguard Item 1 -->
+                                    <!-- Safeguard Item 0: Admin Testing Mode -->
+                                    <div class="sam-safeguard-box p-3 rounded-3 border bg-warning-soft d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="sam-icon-circle bg-warning text-dark rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                                                <span class="fa fa-flask" title="Admin Testing Mode"></span>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold text-dark mb-0">Apply Rules to Administrators</div>
+                                                <small class="text-muted">Enforces security rules on System Admin (admin) users for testing</small>
+                                            </div>
+                                        </div>
+                                        <field name="apply_to_admin" widget="boolean_toggle"/>
+                                    </div>
+
+                                    <!-- Safeguard Item 1: Global Read Only -->
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-danger text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
@@ -156,7 +171,7 @@
                                         <field name="readonly_user" widget="boolean_toggle"/>
                                     </div>
 
-                                    <!-- Safeguard Item 2 -->
+                                    <!-- Safeguard Item 2: Block Debug -->
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-warning text-dark rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
@@ -170,7 +185,7 @@
                                         <field name="disable_debug" widget="boolean_toggle"/>
                                     </div>
 
-                                    <!-- Safeguard Item 3 -->
+                                    <!-- Safeguard Item 3: Block Login -->
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-danger text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
@@ -184,7 +199,7 @@
                                         <field name="disable_login" widget="boolean_toggle"/>
                                     </div>
 
-                                    <!-- Safeguard Item 4 -->
+                                    <!-- Safeguard Item 4: Block Apps -->
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-info text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
@@ -198,7 +213,7 @@
                                         <field name="disable_app_install" widget="boolean_toggle"/>
                                     </div>
 
-                                    <!-- Safeguard Item 5 -->
+                                    <!-- Safeguard Item 5: Block API -->
                                     <div class="sam-safeguard-box p-3 rounded-3 border bg-light d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="sam-icon-circle bg-secondary text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">

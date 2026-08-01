@@ -14,6 +14,13 @@ class AccessManagement(models.Model):
     color = fields.Integer(string='Color Index', default=4)
     description = fields.Text(string='Notes / Purpose')
 
+    # Admin Testing Mode
+    apply_to_admin = fields.Boolean(
+        string='Apply Rules to Administrators (Testing Mode)',
+        default=False,
+        help='Enable this if you want security rules to also apply to System Administrator (admin) users for testing or strict governance.'
+    )
+
     # Scope & Targets
     user_ids = fields.Many2many(
         'res.users', 'access_management_users_rel', 'access_id', 'user_id',
@@ -24,21 +31,16 @@ class AccessManagement(models.Model):
         string='Companies', default=lambda self: self.env.companies
     )
 
-    # 🕒 Enterprise ERP Feature 1: Time-Based Access Expiration (SAP / NetSuite Style)
+    # Time-Based Access Expiration
     valid_from = fields.Datetime(string='Valid From', help='Profile active start timestamp.')
     valid_until = fields.Datetime(string='Valid Until (Expiration)', help='Profile automatically expires after this timestamp.')
     is_expired = fields.Boolean(string='Is Expired', compute='_compute_is_expired', store=False)
 
-    # 📍 Enterprise ERP Feature 2: IP Whitelist & Location Restriction (Salesforce Style)
+    # IP Whitelist & Location Restriction
     allowed_ip_addresses = fields.Char(
         string='Allowed IP Addresses',
         help='Comma-separated IPs or subnets (e.g. 192.168.1.100, 10.0.0.0/24). Leave blank to allow any IP.'
     )
-
-    # ⚠️ Enterprise ERP Feature 3: Emergency Break-Glass Privileged Mode (SAP PAM Style)
-    is_break_glass = fields.Boolean(string='Break-Glass Active', default=False)
-    break_glass_reason = fields.Text(string='Break-Glass Reason')
-    break_glass_until = fields.Datetime(string='Break-Glass Expiration')
 
     # Global System Safeguards
     readonly_user = fields.Boolean(
@@ -141,6 +143,5 @@ class AccessManagement(models.Model):
             '|', ('valid_from', '=', False), ('valid_from', '<=', now),
             '|', ('valid_until', '=', False), ('valid_until', '>=', now),
         ]
-        # ALWAYS USE .sudo() TO AVOID SECURITY RECURSION DEADLOCKS
         profiles = self.sudo().search(domain)
-        return profiles.filtered(lambda p: not (p.is_break_glass and p.break_glass_until and now < p.break_glass_until))
+        return profiles
